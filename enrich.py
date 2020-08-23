@@ -2,18 +2,17 @@
 from flask import Flask,jsonify, render_template, redirect, url_for, request
 from textblob import Blobber
 from textblob.sentiments import NaiveBayesAnalyzer
+#we need this to use naive bayes. it uses movie_revies corpus to predict
 from nltk.corpus import movie_reviews
 import re
 
 
 app = Flask(__name__)
 
-##reroute to predict enpoint
 @app.route('/',methods=['POST'])
 def hello():
     return redirect(url_for('predict_a_tweet'), code=302)
 
-##prediction endpoint
 @app.route('/predict', methods=['POST'])
 def predict_a_tweet():
     tweet_content = request.get_json()
@@ -26,15 +25,12 @@ def predict_a_tweet():
     else:
         return jsonify(sentiment="negative", score=positive_likelyhood)
 
-###replace any impurities in text then split the data for textblob
+
 def clean_text(tweet_to_clean):
-    ### text field in dict. this can be any field that you like to predict its sentiment
     print(tweet_to_clean['text'])
     tmp = tweet_to_clean['text']
-    return ' '.join(re.sub("(@[A-Za-z0-9]+)|([^0-9A-Za-z \t])|(\w+:\/\/\S+)", " ",tmp).split())
+    return ' '.join(re.sub(r"(@[A-Za-z0-9]+)|([^0-9A-Za-z \t])|(\w+:\/\/\S+)", " ",tmp).split())
 
-### "http://0.0.0.0:9555/predict"
-## send the data as {"text": "some tweet here"}. you can change "text" field to whatever you want
 if __name__ == '__main__':
     text_blob = Blobber(analyzer=NaiveBayesAnalyzer())
     app.run(host='0.0.0.0',port=9555, debug=True)
