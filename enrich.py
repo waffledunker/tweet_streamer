@@ -19,7 +19,7 @@ def hello():
 def predict_a_tweet():
     tweet_content = request.get_json()
     cleaned_tweet = clean_text(tweet_content)
-    if cleaned_tweet is not 'neutral':
+    if cleaned_tweet is not 'type@error':
         positive_likelyhood = text_blob(cleaned_tweet).sentiment.p_pos
         if 0.45 <= positive_likelyhood <= 0.55:
             return jsonify(sentiment="neutral", score=positive_likelyhood)
@@ -37,7 +37,7 @@ def clean_text(tweet_to_clean):
         return ' '.join(re.sub(r"(@[A-Za-z0-9]+)|([^0-9A-Za-z \t])|(\w+:\/\/\S+)", " ",tweet_to_clean['text']).split())
     else:
         log.info("request is not string type : {}".format(tweet_to_clean['text']))
-        return 'neutral'
+        return 'type@error'
 
 
 if __name__ == '__main__':
