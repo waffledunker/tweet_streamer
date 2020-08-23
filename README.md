@@ -1,6 +1,6 @@
 # tweet_streamer
 analysing tweets with kibana in realtime with;
-- logstash(using tweeter input)
+- logstash(using twiter input)
 - flask rest api to analyse tweet sentiments 
   - textblob and nltk
 
