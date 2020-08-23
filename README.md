@@ -8,6 +8,6 @@ analysing tweets with textblob in realtime with logstash(using tweeter input) an
   4. add twitter logstash config to your pipeline
   4. start logstash service(pre-installed)
   
-  ![alt text](https://github.com/waffledunker/tweet_streamer/blob/master/proof.png?raw=true)
+  ![alt text](https://github.com/waffledunker/tweet_streamer/blob/master/proof.PNG?raw=true)
   
   That is it.
