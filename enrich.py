@@ -2,6 +2,7 @@
 from flask import Flask,jsonify, render_template, redirect, url_for, request
 from textblob import Blobber
 from textblob.sentiments import NaiveBayesAnalyzer
+#using movie_reviews corpus to apply naivebayes
 from nltk.corpus import movie_reviews
 import re
 import logging as log
@@ -19,6 +20,7 @@ def hello():
 def predict_a_tweet():
     tweet_content = request.get_json()
     cleaned_tweet = clean_text(tweet_content)
+    ##typecheck
     if cleaned_tweet != 'type@error':
         positive_likelyhood = text_blob(cleaned_tweet).sentiment.p_pos
         if 0.45 <= positive_likelyhood <= 0.55:
@@ -28,6 +30,7 @@ def predict_a_tweet():
         else:
             return jsonify(sentiment="negative", score=positive_likelyhood)
     else:
+        #if it is not string, sentiment will be TypeError
         return jsonify(sentiment="TypeError", score= 0.0000)
 
 def clean_text(tweet_to_clean):
