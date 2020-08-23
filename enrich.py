@@ -2,10 +2,12 @@
 from flask import Flask,jsonify, render_template, redirect, url_for, request
 from textblob import Blobber
 from textblob.sentiments import NaiveBayesAnalyzer
-#we need this to use naive bayes. it uses movie_revies corpus to predict
 from nltk.corpus import movie_reviews
 import re
+import logging as log
 
+#logging configurations
+log.basicConfig(filename='enrich_access.log',filemode='a',level=log.DEBUG)
 
 app = Flask(__name__)
 
@@ -27,10 +29,11 @@ def predict_a_tweet():
 
 
 def clean_text(tweet_to_clean):
-    print(tweet_to_clean['text'])
-    tmp = tweet_to_clean['text']
-    return ' '.join(re.sub(r"(@[A-Za-z0-9]+)|([^0-9A-Za-z \t])|(\w+:\/\/\S+)", " ",tmp).split())
+    log.info("requested to predict : {}".format(tweet_to_clean['text']))
+    return ' '.join(re.sub(r"(@[A-Za-z0-9]+)|([^0-9A-Za-z \t])|(\w+:\/\/\S+)", " ",tweet_to_clean['text']).split())
+
 
 if __name__ == '__main__':
+    log.info("Starting the server!")
     text_blob = Blobber(analyzer=NaiveBayesAnalyzer())
     app.run(host='0.0.0.0',port=9555, debug=True)
