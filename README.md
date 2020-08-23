@@ -7,7 +7,7 @@ analysing tweets with textblob in realtime with logstash(using tweeter input) an
   3. python3 enrich.py
   4. add twitter logstash config to your pipeline
   4. start logstash service(pre-installed)
-  
+  ![alt text](https://github.com/waffledunker/tweet_streamer/blob/master/dashboard_simple.PNG?raw=true)
   ![alt text](https://github.com/waffledunker/tweet_streamer/blob/master/proof.PNG?raw=true)
   ![alt text](https://github.com/waffledunker/tweet_streamer/blob/master/logs.PNG?raw=true)
   
