@@ -1,6 +1,7 @@
 # tweet_streamer
 analysing tweets with kibana in realtime with;
 - logstash(using twiter input)
+- elasticsearch as database
 - flask rest api to analyse tweet sentiments 
   - textblob and nltk
 
