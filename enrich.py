@@ -28,11 +28,13 @@ def predict_a_tweet():
 
 ###replace any impurities in text then split the data for textblob
 def clean_text(tweet_to_clean):
+    ### text field in dict. this can be any field that you like to predict its sentiment
     print(tweet_to_clean['text'])
     tmp = tweet_to_clean['text']
     return ' '.join(re.sub("(@[A-Za-z0-9]+)|([^0-9A-Za-z \t])|(\w+:\/\/\S+)", " ",tmp).split())
 
 ### "http://0.0.0.0:9555/predict"
+## send the data as {"text": "some tweet here"}. you can change "text" field to whatever you want
 if __name__ == '__main__':
     text_blob = Blobber(analyzer=NaiveBayesAnalyzer())
     app.run(host='0.0.0.0',port=9555, debug=True)
