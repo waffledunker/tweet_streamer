@@ -1,5 +1,8 @@
 # tweet_streamer
-analysing tweets with textblob in realtime with logstash(using tweeter input) and flask endpoint to enrich data
+analysing tweets with kibana in realtime with;
+- logstash(using tweeter input)
+- flask rest api to analyse tweet sentiments 
+  - textblob and nltk
 
 ##USAGE
   1. pip3 install -r requirements.txt
